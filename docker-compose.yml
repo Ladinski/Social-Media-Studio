@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:16
+    container_name: social_studio_db
+    environment:
+      POSTGRES_USER: socialstudio
+      POSTGRES_PASSWORD: socialstudio
+      POSTGRES_DB: socialstudio
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U socialstudio -d socialstudio"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
