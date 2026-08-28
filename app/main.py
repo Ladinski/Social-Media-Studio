@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 
-from app.core.database import Base, engine
 import app.models
+from app.api.posts import router as posts_router
+from app.core.database import Base, engine
 
 
 Base.metadata.create_all(bind=engine)
@@ -12,6 +13,8 @@ app = FastAPI(
     description="Generate, review, schedule, and publish social media campaign variants.",
     version="1.0.0",
 )
+
+app.include_router(posts_router)
 
 
 @app.get("/")
