@@ -9,4 +9,9 @@ PLATFORM_CONSTRAINTS = {
         "tone": "professional",
         "max_hashtags": 5,
     },
+    "discord": {
+        "max_length": 2000,
+        "tone": "conversational",
+        "max_hashtags": 5,
+    },
 }
