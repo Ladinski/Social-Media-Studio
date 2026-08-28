@@ -1,5 +1,12 @@
 from fastapi import FastAPI
 
+from app.core.database import Base, engine
+import app.models
+
+
+Base.metadata.create_all(bind=engine)
+
+
 app = FastAPI(
     title="Social Media Studio",
     description="Generate, review, schedule, and publish social media campaign variants.",
