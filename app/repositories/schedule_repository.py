@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -45,3 +47,19 @@ class ScheduleRepository:
         )
 
         return db.scalar(stmt)
+
+    @staticmethod
+    def get_due(
+        db: Session,
+        now: datetime,
+    ) -> list[ScheduleSlot]:
+        stmt = (
+            select(ScheduleSlot)
+            .where(
+                ScheduleSlot.status == "pending",
+                ScheduleSlot.scheduled_for <= now,
+            )
+            .order_by(ScheduleSlot.scheduled_for)
+        )
+
+        return list(db.scalars(stmt).all())
