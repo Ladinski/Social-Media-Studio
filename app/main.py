@@ -6,6 +6,7 @@ from app.api.review import router as review_router
 from app.api.variants import router as variants_router
 from app.core.database import Base, engine
 from app.api.schedules import router as schedules_router
+from app.api.publish import router as publish_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -20,6 +21,7 @@ app.include_router(posts_router)
 app.include_router(variants_router)
 app.include_router(review_router)
 app.include_router(schedules_router)
+app.include_router(publish_router)
 
 @app.get("/")
 def root():
