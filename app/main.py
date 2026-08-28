@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 import app.models
 from app.api.posts import router as posts_router
+from app.api.review import router as review_router
 from app.api.variants import router as variants_router
 from app.core.database import Base, engine
 
@@ -17,6 +18,7 @@ app = FastAPI(
 
 app.include_router(posts_router)
 app.include_router(variants_router)
+app.include_router(review_router)
 
 
 @app.get("/")
