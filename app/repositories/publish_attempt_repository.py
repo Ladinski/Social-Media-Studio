@@ -42,3 +42,30 @@ class PublishAttemptRepository:
         )
 
         return db.scalar(stmt)
+
+    @staticmethod
+    def get_all(
+        db: Session,
+    ) -> list[PublishAttempt]:
+        stmt = (
+            select(PublishAttempt)
+            .order_by(PublishAttempt.created_at.desc())
+        )
+
+        return list(db.scalars(stmt).all())
+
+    @staticmethod
+    def get_for_schedule(
+        db: Session,
+        schedule_slot_id: int,
+    ) -> list[PublishAttempt]:
+        stmt = (
+            select(PublishAttempt)
+            .where(
+                PublishAttempt.schedule_slot_id
+                == schedule_slot_id
+            )
+            .order_by(PublishAttempt.created_at.desc())
+        )
+
+        return list(db.scalars(stmt).all())

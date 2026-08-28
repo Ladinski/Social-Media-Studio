@@ -9,6 +9,7 @@ from app.api.review import router as review_router
 from app.api.schedules import router as schedules_router
 from app.api.variants import router as variants_router
 from app.core.database import Base, engine
+from app.api.history import router as history_router
 from app.services.scheduler import (
     start_scheduler,
     stop_scheduler,
@@ -43,7 +44,7 @@ app.include_router(variants_router)
 app.include_router(review_router)
 app.include_router(schedules_router)
 app.include_router(publish_router)
-
+app.include_router(history_router)
 
 @app.get("/")
 def root():
